@@ -16,6 +16,6 @@ The code is written in R. Each function takes some combination of the following 
 
 3. "formatted_data": This is a list containing the data in a specific format. The list should contain the following elements:
    - "Y": A vector of length $N$ containing the outcome variable with values in $\mathbb{R}$.
-   - "T": A vector of length $N$ containing the observed treatment variable.
-   - "Z": A vector of length $N$ containing the instrument variable.
-   - "X":  A vector of length $N$ containing the covariate variable.
+   - "T": A vector of length $N$ containing the observed treatment variable with values in $`\{0,1,\dots,N_T - 1\}`$.
+   - "Z": A vector of length $N$ containing the instrument variable with values in $`\{0,1,\dots,N_Z - 1\}`$. As with the treatment variable, the numbering of the instrument values does not represent any particular ordering but is rather a convention adopted for ease of implementation.
+   - "X":  A matrix of size $N \times N_X$ containing the covariate variable with values in $\mathbb{R}$. If there are no covariates set this to a vector of ones of length $N$.
