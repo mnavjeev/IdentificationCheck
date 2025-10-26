@@ -34,3 +34,14 @@ With these inputs, the main functions in `check_identified.R` are as follows:
 2. `typesIdentified(responseTypes)`: This function checks which response type probabilities, i.e parameters of the form $\Pr(T^\star = t^\star)$, are identified based on the response types provided. It returns a vector of length $N_S$ with entries equal to one if the corresponding response type is identified and zero otherwise. 
 
 3. `outcomesIdentfied(responseTypes)`: This function checs whether outcome parameters of the form $E[Y(t) | T^\star = t^\star]$ are identified based on the matrix of admissable response types provided. It returns a matrix of size $N_T \times N_S$ with entries equal to one if the corresponding outcome is identified and zero otherwise.
+
+4. `estimateTypeProb(formatted_data, ellMat, responseTypes)`: This function checks whether the parameter defined by the function $E[\ell(T^\star, X)]$ is identified based on the response types and the $\ell$ function provided. If the parameter is identified, it computes the point estimate and standard error of the estimator proposed in Section 5 of the paper. It returns a list with the following elements:
+    - "psi": An $N$ element vector containing the influence function values for each observation.
+    - "point.estimate": A scalar containing the point estimate of the parameter.
+    - "se": A scalar containing the standard error of the estimator.
+    - "nu": A tensor containing the function $\nu(t, z, x)$ defined in the paper.
+
+5. `estimateAllTypes(formatted_data, responseTypes)`: This function checks which response type probabilities are identified based on the response types provided. For each identified response type probability, it computes the point estimate and standard error of the estimator proposed in Section 5 of the paper. It returns a list with the following elements:
+    - "identified.params": A vector containing the labels of the identified response type probabilities. A label is a string of the form "P(T\*=t\*)" where t\* is the treatment value corresponding to the response type.
+    - "se": A vector of length $N_S$ containing the standard errors of each response type probability. For non-identified response types, the corresponding entry is set to NA.
+    - "psi": A matrix of size $N \times N_S$ containing the influence function values for each observation and each response type probability. For non-identified response types, the corresponding column is set to NA.
