@@ -47,3 +47,10 @@ With these inputs, the main functions in `check_identified.R` are as follows:
     - "standard.errors": A vector containing the standard errors of each response type probability. 
     - "vcov": A matrix containing the variance-covariance matrix of the estimated identified response type probabilities.
     - "scores": A matrix of size $N \times N_{identified}$ containing the influence function values for each observation and each identified response type probability, where $N_{identified}$ is the number of identified response type probabilities.
+
+6. `estimateOutcome(formatted_data, ellMat, responseTypes, tVal)`: This function checks whether the outcome parameter $\E[Y(tVal)\ell(T^\star)]$ is identified. NOTE: For this function, the $\ell$ function is assumed to not depend on covariates so that the value of `ellMat` passed to `estimateOutcome` must be a vector of length $N_S$.
+
+If the parameter is identified, it computes the point estimate and standard error of the estimator proposed in Section 5 of the paper. It returns a list with the following elements:
+    - "scores": An $N$ element vector containing the influence function values for each observation.
+    - "point.estimate": A scalar containing the point estimate of the parameter.
+    - "se": A scalar containing the standard error of the estimator.
