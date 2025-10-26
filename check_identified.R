@@ -125,7 +125,9 @@ outcomesIdentified <- function(responseTypes) {
   
   
   # loop through the treatments
+  idMat <- cbind()
   for (t in treatments) {
+    idVec <- c()
     Bt <- t(1*(responseMat == t))
   
     # Loop through the response types
@@ -133,14 +135,19 @@ outcomesIdentified <- function(responseTypes) {
       ellMat <- matrix(idMat[, type])
       temp <- lm(ellMat ~ Bt + 0)
       temp.sum <- summary(temp)
+      id = 0 
       if (temp.sum$r.squared > 0.999) {
+        id = 1
         print(paste(
           "E[g(Y",t,") | T* = t",type,"*] is identified",
           sep = ""
         ))
       }
+      idVec <- c(idVec, id)
     }
+    idMat <- cbind(idMat, idVec)
   }
+  idMat
 }
 
 #########################################################################

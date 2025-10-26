@@ -26,4 +26,4 @@ With these inputs, the main functions in `check_identified.R` are as follows:
 
 2. `typesIdentified(responseTypes)`: This function checks which response type probabilities, i.e parameters of the form $\Pr(T^\star = t^\star)$, are identified based on the response types provided. It returns a vector of length $N_S$ with entries equal to one if the corresponding response type is identified and zero otherwise. 
 
-3. `outcomesIdentfied(responseTypes)`: This function checs whether outcome probabilities of the form $E[Y(t) | T^\star = t^\star]$ are identified based on the matrix of admissable response types provided. It returns a vector of length $N_S$ with entries equal to one if the corresponding outcome probability is identified and zero otherwise.
+3. `outcomesIdentfied(responseTypes)`: This function checks whether all parameters of the form $E[Y(t) | T^\star = t^\star]$ are identified based on the matrix of admissable response types provided. It returns a matrix of size $N_T \times N_S$ with entries equal to one if the corresponding outcome is identified and zero otherwise.
