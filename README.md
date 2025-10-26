@@ -6,4 +6,6 @@ This repository contains code to check whether a certain class of parameters con
 
 2. `check_identified_test.R`: This file contains some example code to illustrate how to use the functions in `check_identified.R`. 
 
-## 
+## How to use `check_identified.R`
+
+
