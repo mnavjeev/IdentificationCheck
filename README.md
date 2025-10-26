@@ -13,3 +13,9 @@ The code is written in R. Each function takes some combination of the following 
 1. "responseTypes": This is a matrix of shape $N_Z \times N_S$ whose entries are elements of $`\{0,1,\dots,N_T - 1\}`$ where $N_Z$ is the number of instruments, $N_S$ is the number of response types. The assignment of treatment values to numbers need not represent any particular ordering over the response types but is rather a convention adopted so that the code can easily check which parameters are identified.
 
 2. "ellMat": This is a matrix of shape $N_S \times N_X$ whose entries are again elements of $`\{0,1,\dots,N_T - 1\}`$ where $N_X$ is the number of covariate values if there is a discrete covariate. This vector represents values of the function $\ell(T^\star, X)$ evaluated at each response type and covariate value. The ordering of the response types corresponds to the ordering in the "responseTypes" matrix, i.e the first column of responseTypes corresponds to the first row of ellMat, and so on. If the covariate $X$ does not enter the function $\ell(T^\star, X)$, this can be a vector of length $N_S$.
+
+3. "formatted_data": This is a list containing the data in a specific format. The list should contain the following elements:
+   - "Y": A vector of length $N$ containing the outcome variable with values in $\mathbb{R}$.
+   - "T": A vector of length $N$ containing the observed treatment variable.
+   - "Z": A vector of length $N$ containing the instrument variable.
+   - "X":  A vector of length $N$ containing the covariate variable.
