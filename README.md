@@ -48,9 +48,17 @@ With these inputs, the main functions in `check_identified.R` are as follows:
     - "vcov": A matrix containing the variance-covariance matrix of the estimated identified response type probabilities.
     - "scores": A matrix of size $N \times N_{identified}$ containing the influence function values for each observation and each identified response type probability, where $N_{identified}$ is the number of identified response type probabilities.
 
-6. `estimateOutcome(formatted_data, ellMat, responseTypes, tVal)`: This function checks whether the outcome parameter $\mathbb{E}[Y(tVal)\ell(T^\star)]$ is identified. NOTE: For this function, the $\ell$ function is assumed to not depend on covariates so that the value of `ellMat` passed to `estimateOutcome` must be a vector of length $N_S$.
+6. `estimateOutcome(formatted_data, ellMat, responseTypes, tVal)`: This function checks whether the outcome parameter $\mathbb{E}[Y(tVal)\ell(T^\star)]$ is identified. NOTE: For this function, the $\ell(\cdot)$ function is assumed to not depend on covariates so that the value of `ellMat` passed to `estimateOutcome` must be a vector of length $N_S$.
 
 If the parameter is identified, it computes the point estimate and standard error of the estimator proposed in Section 5 of the paper. It returns a list with the following elements:
     - "scores": An $N$ element vector containing the influence function values for each observation.
     - "point.estimate": A scalar containing the point estimate of the parameter.
     - "se": A scalar containing the standard error of the estimator.
+
+7. `estimateAllOutcomes(formatted_data, responseTypes)`: This function checks which outcome parameters of the form $\mathbb{E}[Y(t) | T^\star = t^\star]$ are identified based on the response types provided. For each identified outcome parameter, it computes the point estimate and standard error of the estimator proposed in Section 5 of the paper. It returns a list with the following elements:
+    - "identified.params": A vector containing the labels of the identified outcome parameters. A label is a string of the form "E[Y(t) | T\*=t\*]" where t is the treatment value and t\* is the treatment value corresponding to the response type.
+    - "point.estimates": A vector containing the point estimates of each identified outcome parameter.
+    - "standard.errors": A vector containing the standard errors of each identified outcome parameter. 
+    - "outcome.scores": A matrix of size $N \times N_{identified}$ containing the influence function values for each observation and each identified outcome parameter, where $N_{identified}$ is the number of identified outcome parameters. These influence function values are for the ``numerators'', i.e for parameters of the form $\mathbb{E}[Y(t) \mathbb{1}\{T^\star = t^\star\}]$.
+    - "type.scores": A matrix of size $N \times N_{identified}$ containing the influence function values for each observation and each identified outcome parameter. These influence function values are for the ``denominators'', i.e for parameters of the form $\Pr(T^\star = t^\star)$.
+    - "vcov": A matrix containing the variance-covariance matrix of the estimated identified outcome parameters.
