@@ -10,17 +10,7 @@ This repository contains code to check whether a certain class of parameters con
 
 The code is written in R. Each function takes some combination of the following inputs: 
 
-- "responseTypes": This is a matrix of shape $N_Z \times N_S$ whose entries are elements of $`\{0,1,\dots,N_T - 1\}`$ where $N_Z$ is the number of instruments, $N_S$ is the number of response types. The assignment of treatment values to numbers need not represent any particular ordering over the response types but is rather a convention adopted so that the code can easily check which parameters are identified. For example, if there are two treatment values $T^\star \in \{0,1\}$ and three response types defined as follows: 
-   - Compliers: $T^\star(0) = 0, T^\star(1) = 1$
-   - Never-takers: $T^\star(0) = 0, T^\star(1) = 0$
-   - Always-takers: $T^\star(0) = 1, T^\star(1) = 1$
-   Then the responseTypes matrix would be:
-   ```
-   responseTypes = matrix(c(0,0,1,1,
-                            1,0,1,0), 
-                          nrow=2, byrow=TRUE)
-   ```
-   Here, the first column corresponds to compliers, the second to never-takers, the third to always-takers and the fourth to defiers.
+- "responseTypes": This is a matrix of shape $N_Z \times N_S$ whose entries are elements of $`\{0,1,\dots,N_T - 1\}`$ where $N_Z$ is the number of instruments, $N_S$ is the number of response types. The assignment of treatment values to numbers need not represent any particular ordering over the response types but is rather a convention adopted so that the code can easily check which parameters are identified.
 
 - "ellMat": This is a matrix of shape $N_S \times N_X$ whose entries are again elements of $`\{0,1,\dots,N_T - 1\}`$ where $N_X$ is the number of covariate values if there is a discrete covariate. This vector represents values of the function $\ell(T^\star, X)$ evaluated at each response type and covariate value. The ordering of the response types corresponds to the ordering in the "responseTypes" matrix, i.e the first column of responseTypes corresponds to the first row of ellMat, and so on. If the covariate $X$ does not enter the function $\ell(T^\star, X)$, this can be a vector of length $N_S$.
 
@@ -30,7 +20,7 @@ The code is written in R. Each function takes some combination of the following 
    - "Z": A vector of length $N$ containing the instrument variable with values in $`\{0,1,\dots,N_Z - 1\}`$. As with the treatment variable, the numbering of the instrument values does not represent any particular ordering but is rather a convention adopted for ease of implementation.
    - "X":  A matrix of size $N \times N_X$ containing the covariate variable with values in $\mathbb{R}$. If there are no covariates set this to a vector of ones of length $N$.
 
-With these inputs, there are four main functions in `check_identified.R`:
+With these inputs, the main functions in `check_identified.R` are as follows:
 
 1. `is_identified(responseTypes, ellMat)`: This function checks whether the parameter defined by the function $E[\ell(T^\star, X)]$ is identified based on the response types and the $\ell$ function provided. It returns a boolean value, "isIdentified" equal to one if the parameter is identified and zero otherwise. If the parameter is identified, it also returns a tensor "nu" which corresponds to the function $\nu(t, z, x)$ defined in the paper.
 
