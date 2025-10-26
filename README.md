@@ -10,4 +10,4 @@ This repository contains code to check whether a certain class of parameters con
 
 The code is written in R. Each function takes some combination of the following inputs: 
 
-1. "responseTypes": This is a matrix of length $N_Z \times N_S$ whose entries are elemetns of ${0,1,\dots,N_T - 1}$ where $N_Z$ is the number of instruments, $N_S$ is the number of response types 
+1. "responseTypes": This is a matrix of length $N_Z \times N_S$ whose entries are elements of {$0,1,\dots,N_T - 1$} where $N_Z$ is the number of instruments, $N_S$ is the number of response types 
