@@ -10,7 +10,17 @@ This repository contains code to check whether a certain class of parameters con
 
 The code is written in R. Each function takes some combination of the following inputs: 
 
-- "responseTypes": This is a matrix of shape $N_Z \times N_S$ whose entries are elements of $`\{0,1,\dots,N_T - 1\}`$ where $N_Z$ is the number of instruments, $N_S$ is the number of response types. The assignment of treatment values to numbers need not represent any particular ordering over the response types but is rather a convention adopted so that the code can easily check which parameters are identified.
+- "responseTypes": This is a matrix of shape $N_Z \times N_S$ whose entries are elements of $`\{0,1,\dots,N_T - 1\}`$ where $N_Z$ is the number of instruments, $N_S$ is the number of response types. The assignment of treatment values to numbers need not represent any particular ordering over the response types but is rather a convention adopted so that the code can easily check which parameters are identified. For example, if there are two treatment values $T^\star \in \{0,1\}$ and three response types defined as follows: 
+   - Compliers: $T^\star(0) = 0, T^\star(1) = 1$
+   - Never-takers: $T^\star(0) = 0, T^\star(1) = 0$
+   - Always-takers: $T^\star(0) = 1, T^\star(1) = 1$
+   Then the responseTypes matrix would be:
+   ```
+   responseTypes = matrix(c(0,0,1,1,
+                            1,0,1,0), 
+                          nrow=2, byrow=TRUE)
+   ```
+   Here, the first column corresponds to compliers, the second to never-takers, the third to always-takers and the fourth to defiers.
 
 - "ellMat": This is a matrix of shape $N_S \times N_X$ whose entries are again elements of $`\{0,1,\dots,N_T - 1\}`$ where $N_X$ is the number of covariate values if there is a discrete covariate. This vector represents values of the function $\ell(T^\star, X)$ evaluated at each response type and covariate value. The ordering of the response types corresponds to the ordering in the "responseTypes" matrix, i.e the first column of responseTypes corresponds to the first row of ellMat, and so on. If the covariate $X$ does not enter the function $\ell(T^\star, X)$, this can be a vector of length $N_S$.
 
@@ -26,4 +36,4 @@ With these inputs, there are four main functions in `check_identified.R`:
 
 2. `typesIdentified(responseTypes)`: This function checks which response type probabilities, i.e parameters of the form $\Pr(T^\star = t^\star)$, are identified based on the response types provided. It returns a vector of length $N_S$ with entries equal to one if the corresponding response type is identified and zero otherwise. 
 
-3. `outcomesIdentfied(responseTypes)`: 
+3. `outcomesIdentfied(responseTypes)`: This function checs whether outcome probabilities of the form $E[Y(t) | T^\star = t^\star]$ are identified based on the matrix of admissable response types provided. It returns a vector of length $N_S$ with entries equal to one if the corresponding outcome probability is identified and zero otherwise.
