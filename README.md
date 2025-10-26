@@ -43,5 +43,7 @@ With these inputs, the main functions in `check_identified.R` are as follows:
 
 5. `estimateAllTypes(formatted_data, responseTypes)`: This function checks which response type probabilities are identified based on the response types provided. For each identified response type probability, it computes the point estimate and standard error of the estimator proposed in Section 5 of the paper. It returns a list with the following elements:
     - "identified.params": A vector containing the labels of the identified response type probabilities. A label is a string of the form "P(T\*=t\*)" where t\* is the treatment value corresponding to the response type.
-    - "se": A vector of length $N_S$ containing the standard errors of each response type probability. For non-identified response types, the corresponding entry is set to NA.
-    - "psi": A matrix of size $N \times N_S$ containing the influence function values for each observation and each response type probability. For non-identified response types, the corresponding column is set to NA.
+    - "point.estimates": A vector containing the point estimates of each identified response type probability.
+    - "standard.errors": A vector containing the standard errors of each response type probability. 
+    - "vcov": A matrix containing the variance-covariance matrix of the estimated identified response type probabilities.
+    - "scores": A matrix of size $N \times N_{identified}$ containing the influence function values for each observation and each identified response type probability, where $N_{identified}$ is the number of identified response type probabilities.
