@@ -24,4 +24,6 @@ With these inputs, there are four main functions in `check_identified.R`:
 
 1. `is_identified(responseTypes, ellMat)`: This function checks whether the parameter defined by the function $E[\ell(T^\star, X)]$ is identified based on the response types and the $\ell$ function provided. It returns a boolean value, "isIdentified" equal to one if the parameter is identified and zero otherwise. If the parameter is identified, it also returns a tensor "nu" which corresponds to the function $\nu(t, z, x)$ defined in the paper.
 
-2. 
+2. `typesIdentified(responseTypes)`: This function checks which response type probabilities, i.e parameters of the form $\Pr(T^\star = t^\star)$, are identified based on the response types provided. It returns a vector of length $N_S$ with entries equal to one if the corresponding response type is identified and zero otherwise. 
+
+3. `outcomesIdentfied(responseTypes)`: 

@@ -80,13 +80,16 @@ typesIdentified <- function(responseTypes) {
   idMat <- diag(nrow = NTypes)
   
   # Check if each response type is identified
+  idVec <- c()
   for (type in 1:NTypes) {
     ellMat <- matrix(idMat[,type])
     idCheck <- isIdentified(ellMat, responseTypes)
     if (idCheck$isIdentified == 1) {
       print(paste("Pr(T* = t", type, "*) is identified", sep = ""))
     }
+    idVec <- c(idVec, idCheck$isIdentified)
   }
+  idVec
 }
 
 #########################################################################
