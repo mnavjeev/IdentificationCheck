@@ -29,11 +29,11 @@ The first vector encodes the always-takers (who take treatment regardless of the
 
 With these inputs, the main functions in `check_identified.R` are as follows:
 
-1. `is_identified(responseTypes, ellMat)`: This function checks whether the parameter defined by the function $E[\ell(T^\star, X)]$ is identified based on the response types and the $\ell$ function provided. It returns a boolean value, "isIdentified" equal to one if the parameter is identified and zero otherwise. If the parameter is identified, it also returns a tensor "nu" which corresponds to the function $\nu(t, z, x)$ defined in the paper.
+1. `is_identified(responseTypes, ellMat)`: This function checks whether the parameter defined by the function $\mathbb{E}[\ell(T^\star, X)]$ is identified based on the response types and the $\ell$ function provided. It returns a boolean value, "isIdentified" equal to one if the parameter is identified and zero otherwise. If the parameter is identified, it also returns a tensor "nu" which corresponds to the function $\nu(t, z, x)$ defined in the paper.
 
 2. `typesIdentified(responseTypes)`: This function checks which response type probabilities, i.e parameters of the form $\Pr(T^\star = t^\star)$, are identified based on the response types provided. It returns a vector of length $N_S$ with entries equal to one if the corresponding response type is identified and zero otherwise. 
 
-3. `outcomesIdentfied(responseTypes)`: This function checs whether outcome parameters of the form $E[Y(t) | T^\star = t^\star]$ are identified based on the matrix of admissable response types provided. It returns a matrix of size $N_T \times N_S$ with entries equal to one if the corresponding outcome is identified and zero otherwise.
+3. `outcomesIdentfied(responseTypes)`: This function checs whether outcome parameters of the form $\mathbb{E}[Y(t) | T^\star = t^\star]$ are identified based on the matrix of admissable response types provided. It returns a matrix of size $N_T \times N_S$ with entries equal to one if the corresponding outcome is identified and zero otherwise.
 
 4. `estimateTypeProb(formatted_data, ellMat, responseTypes)`: This function checks whether the parameter defined by the function $E[\ell(T^\star, X)]$ is identified based on the response types and the $\ell$ function provided. If the parameter is identified, it computes the point estimate and standard error of the estimator proposed in Section 5 of the paper. It returns a list with the following elements:
     - "psi": An $N$ element vector containing the influence function values for each observation.
@@ -48,7 +48,7 @@ With these inputs, the main functions in `check_identified.R` are as follows:
     - "vcov": A matrix containing the variance-covariance matrix of the estimated identified response type probabilities.
     - "scores": A matrix of size $N \times N_{identified}$ containing the influence function values for each observation and each identified response type probability, where $N_{identified}$ is the number of identified response type probabilities.
 
-6. `estimateOutcome(formatted_data, ellMat, responseTypes, tVal)`: This function checks whether the outcome parameter $\E[Y(tVal)\ell(T^\star)]$ is identified. NOTE: For this function, the $\ell$ function is assumed to not depend on covariates so that the value of `ellMat` passed to `estimateOutcome` must be a vector of length $N_S$.
+6. `estimateOutcome(formatted_data, ellMat, responseTypes, tVal)`: This function checks whether the outcome parameter $\mathbb{E}[Y(tVal)\ell(T^\star)]$ is identified. NOTE: For this function, the $\ell$ function is assumed to not depend on covariates so that the value of `ellMat` passed to `estimateOutcome` must be a vector of length $N_S$.
 
 If the parameter is identified, it computes the point estimate and standard error of the estimator proposed in Section 5 of the paper. It returns a list with the following elements:
     - "scores": An $N$ element vector containing the influence function values for each observation.
